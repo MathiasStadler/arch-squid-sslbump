@@ -728,3 +728,9 @@ squid -NsY -f /etc/squid/squid.conf
 http://squid-web-proxy-cache.1019090.n4.nabble.com/Transition-from-squid3-5-to-squid4-ciphers-don-t-work-anymore-ERROR-Unknown-TLS-option-SINGLE-DH-USE-td4684794.html
 https://wiki.openssl.org/index.php/List_of_SSL_OP_Flags#SSL_OP_SINGLE_DH_USE
 
+## display systzem wide ca-certificates
+
+```bash
+awk -v cmd='openssl x509 -noout -subject' '
+    /BEGIN/{close(cmd)};{print | cmd}' < /etc/ssl/certs/ca-certificates.crt
+```
